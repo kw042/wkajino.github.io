@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sosu</title>
+<meta charset="utf-8">
+
+<script> 
+let pri0, pri1;
+
+function genep(limit) {
+  let primes = [];
+  let sieve = new Array(limit + 1).fill(true);
+
+  for (let p = 2; p * p <= limit; p++) {
+    if (sieve[p] === true) {
+      for (let i = p * p; i <= limit; i += p) {
+        sieve[i] = false;
+      }
+    }
+  }
+
+  for (let p = 2; p <= limit; p++) {
+    if (sieve[p] === true) {
+      primes.push(p);
+    }
+  }
+
+  let num1 = Math.floor(Math.random() * primes.length);
+  pri0 = primes[num1];
+  let num2 = Math.floor(Math.random() * primes.length);
+  pri1 = primes[num2];
+  i0.value = pri0 * pri1;
+}
+
+function check() {
+  let i1 = parseInt(document.getElementById("i1").value);
+  let i2 = parseInt(document.getElementById("i2").value);
+  
+  if (i1 == pri0 && i2 == pri1) {
+    i3.value = "true";
+  } else {
+    i3.value = "false";
+  }
+}
+</script>
+
+</head>
+<body onload="genep(100)">
+<h2>素因数分解</h2>
+<div>
+<p><input type="text" id="i0" placeholder="" disabled></p>
+<p><input type="text" id="i1" placeholder=""></p>
+<p><input type="text" id="i2" placeholder=""></p>
+<button id="b1" onclick="check()">確認</button>
+<p><input type="text" id="i3" placeholder="" disabled></p>
+</div>
+</body>
+</html>
